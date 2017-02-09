@@ -74,6 +74,45 @@ preBuild.dependsOn projectCheckStyle
 
 # PMD
 
+[PMD官网](https://pmd.github.io/)
+
+事实上，PMD是一个工作有点类似Findbugs的强大工具，但是(PMD)直接检查源代码而不是检查字节码(顺便说句，PMD适用很多语言)。
+(PMD和Findbugs)的核心目标是相同的，通过静态分析方法找出哪些模式引起的bug。因此为什么同时使用Findbugs和PMD呢？
+好吧！尽管Findbugs和PMD拥有相同的目标，(但是)他们的检查方法是不同的。所以PMD有时检查出的bug但是Findbugs却检查不出来，反之亦然。
+
+## 集成
+
+```gradle
+apply plugin: 'pmd'
+
+// 定义生成文件目录
+def pmdReportPath = "${project.rootDir}/analysis/reports/"
+
+task projectPmd(type: Pmd) {
+    ignoreFailures = true
+    ruleSetFiles = files("pmd.xml") // 自定义规则
+    ruleSets = []
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**', '**/build/**'
+
+    // 定义输出报告
+    reports {
+        xml {
+            enabled = false
+            destination "$pmdReportPath/Pmd.xml"
+        }
+        html {
+            enabled = true
+            destination "$pmdReportPath/Pmd.html"
+        }
+    }
+}
+
+preBuild.dependsOn projectPmd
+```
+
 # FindBugs
 
 [FindBugs官网](http://findbugs.sourceforge.net/)
@@ -82,6 +121,8 @@ findbugs是一个分析bytecode并找出其中可疑部分的一个工具。它�
 
 FindBugs基本上只需要一个程序来做分析的字节码，所以这是非常容易使用。它能检测到常见的错误，如错误的布尔运算符。
 FindBugs也能够检测到由于误解语言特点的错误，如Java参数调整（这不是真的有可能因为它的参数是传值）。
+
+## 集成
 
 ```gradle
 apply plugin: 'findbugs'
@@ -102,13 +143,13 @@ task findbugs(type: FindBugs) {
 
     // 定义输出报告
     reports {
-        xml.enabled = false
-        html.enabled = true
         xml {
+            enabled = false
             destination "$findbugsReportPath/FindBugs.xml"
             xml.withMessages true
         }
         html {
+            enabled = true
             destination "$findbugsReportPath/FindBugs.html"
         }
     }
@@ -124,7 +165,6 @@ afterEvaluate {
     }
 }
 ```
-## 集成
 
 # Infer
 
@@ -140,5 +180,7 @@ afterEvaluate {
 [Android Studio配置CheckStyle](http://www.jianshu.com/p/fc2f45a9ee37)
 
 [Github AndroidCodeQuality](https://github.com/MasonLiuChn/AndroidCodeQuality)
+
+[PMD官网](https://pmd.github.io/)
 
 [FindBugs官网](http://findbugs.sourceforge.net/)
