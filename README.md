@@ -26,6 +26,9 @@ Checkstyle会发现大量的问题，特别是在你运用了大量的规则配�
 在Android中集成CheckStyle也很简单，只需要在Gradle添加少许配置即可。
 
 ```gradle
+apply plugin: 'checkstyle'
+
+
 // 定义生成文件目录
 def checkStyleReportPath = "${project.rootDir}/reports/"
 
@@ -36,7 +39,7 @@ clean.doFirst {
 
 task projectCheckStyle(type: Checkstyle) {
     source 'src'
-    configFile file("checkstyle.xml")
+    configFile file("checkstyle.xml") // 配置样式
     include '**/*.java'
     exclude '**/gen/**'
     classpath = files()
@@ -69,10 +72,59 @@ tasks.withType(Checkstyle).each { checkstyleTask ->
 preBuild.dependsOn projectCheckStyle
 ```
 
-# Findbugs
-
-
 # PMD
+
+# FindBugs
+
+[FindBugs官网](http://findbugs.sourceforge.net/)
+
+findbugs是一个分析bytecode并找出其中可疑部分的一个工具。它给项目字节码做一个全面扫描，通过一些通用规则去判断可能潜在的一些问题，比如性能，多线程安全等等。
+
+FindBugs基本上只需要一个程序来做分析的字节码，所以这是非常容易使用。它能检测到常见的错误，如错误的布尔运算符。
+FindBugs也能够检测到由于误解语言特点的错误，如Java参数调整（这不是真的有可能因为它的参数是传值）。
+
+```gradle
+apply plugin: 'findbugs'
+
+// 定义生成文件目录
+def findbugsReportPath = "${project.rootDir}/reports/"
+
+task findbugs(type: FindBugs) {
+    ignoreFailures = true
+    excludeFilter = new File("findbugs.xml") // 自定义配置文件
+    classpath = files()
+    classes = fileTree('build/intermediates/classes/')
+    effort = 'max'
+
+    source = fileTree('src')
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    // 定义输出报告
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "$findbugsReportPath/FindBugs.xml"
+            xml.withMessages true
+        }
+        html {
+            destination "$findbugsReportPath/FindBugs.html"
+        }
+    }
+}
+
+afterEvaluate {
+    tasks.withType(Task).each { task ->
+        task.doLast {
+            if (task.name.startsWith("assemble")) {
+                tasks.findByName("findbugs").execute()
+            }
+        }
+    }
+}
+```
+## 集成
 
 # Infer
 
@@ -88,3 +140,5 @@ preBuild.dependsOn projectCheckStyle
 [Android Studio配置CheckStyle](http://www.jianshu.com/p/fc2f45a9ee37)
 
 [Github AndroidCodeQuality](https://github.com/MasonLiuChn/AndroidCodeQuality)
+
+[FindBugs官网](http://findbugs.sourceforge.net/)
