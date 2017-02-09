@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 25
@@ -28,3 +29,44 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     testCompile 'junit:junit:4.12'
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// checkstyle
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+def checkStyleReportPath = "${project.rootDir}/reports/"
+
+clean.doFirst {
+    delete checkStyleReportPath
+}
+
+task projectCheckStyle(type: Checkstyle) {
+    source 'src'
+    configFile file("checkstyle.xml")
+    include '**/*.java'
+    exclude '**/gen/**'
+    classpath = files()
+    ignoreFailures true
+
+    reports {
+        html {
+            destination "${checkStyleReportPath}/Checkstyle.html"
+        }
+        xml {
+            destination "${checkStyleReportPath}/Checkstyle.xml"
+        }
+    }
+}
+
+tasks.withType(Checkstyle).each { checkstyleTask ->
+    checkstyleTask.doLast {
+        reports.all { report ->
+            def outputFile = report.destination
+            if (outputFile.exists() && outputFile.text.contains("<error ") && !checkstyleTask.ignoreFailures) {
+                throw new GradleException("There were checkstyle errors! For more info check $outputFile")
+            }
+        }
+    }
+}
+
+preBuild.dependsOn projectCheckStyle
