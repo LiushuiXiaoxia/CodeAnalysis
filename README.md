@@ -2,12 +2,16 @@ Android静态代码分析
 
 ---
 
+[TOC]
+
 最佳项目里面来了很多新的小伙伴，然后每个人的代码风格还不一样，虽然有代码风格文档以及代码review。
 
 但是这些东西需要花费很多人力和时间来做，所以就研究了下静态代码分析，能用工具完成的坚决不用人肉。同时静态代码分析还能解决很多潜在的bug问题。
 
 下面依次对介绍几个Android常用的静态代码分析工具，同时顺便介绍下我厂刘全栈的对静态代码分析做的工具
 [AndroidCodeQuality](https://github.com/MasonLiuChn/AndroidCodeQuality)。
+
+本文最先发表于[Github](https://github.com/LiushuiXiaoxia/CodeAnalysis)，如有转载，请注明转载出处。
 
 # CheckStyle
 
@@ -264,7 +268,7 @@ android {
 
 互联网软件的开发和发布，已经形成了一套标准流程，最重要的组成部分就是持续集成（Continuous integration，简称CI）。
 
-![CI](doc/ci.png)
+![CI](https://github.com/LiushuiXiaoxia/CodeAnalysis/raw/master/doc/ci.png)
 
 持续集成指的是，频繁地（一天多次）将代码集成到主干，它的好处主要有两个。
 
