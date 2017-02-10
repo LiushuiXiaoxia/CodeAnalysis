@@ -20,6 +20,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+        disable 'LogNotTimber', 'IconMissingDensityFolder'
+        htmlReport true
+        htmlOutput file("${project.rootDir}/analysis/reports/lint-report.html")
+        xmlReport true
+        xmlOutput file("${project.rootDir}/analysis/reports/lint-report.xml")
+    }
 }
 
 dependencies {
