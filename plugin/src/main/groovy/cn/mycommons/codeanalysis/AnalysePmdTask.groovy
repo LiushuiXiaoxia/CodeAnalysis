@@ -27,11 +27,11 @@ public class AnalysePmdTask extends DefaultTask {
             reports {
                 xml {
                     enabled = false
-                    destination "${analyse.pmdReportPath}/Pmd.xml"
+                    destination "${analyse.reportPath}/Pmd.xml"
                 }
                 html {
                     enabled = true
-                    destination "${analyse.pmdReportPath}/Pmd.html"
+                    destination "${analyse.reportPath}/Pmd.html"
                 }
             }
         }

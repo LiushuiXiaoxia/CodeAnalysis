@@ -8,10 +8,7 @@ public class AnalysePluginExtension {
     def pmdConfig = "pmd.xml"
     def findbugsConfig = "findbugs.xml"
 
-    def checkStyleReportPath = "analysis/reports/"
-    def pmdReportPath = "analysis/reports/"
-    def findbugsReportPath = "analysis/reports/"
-
+    def reportPath = "analysis/reports/"
 
     @Override
     public String toString() {
@@ -20,9 +17,7 @@ public class AnalysePluginExtension {
                 ", checkStyleConfig=" + checkStyleConfig +
                 ", pmdConfig=" + pmdConfig +
                 ", findbugsConfig=" + findbugsConfig +
-                ", checkStyleReportPath=" + checkStyleReportPath +
-                ", pmdReportPath=" + pmdReportPath +
-                ", findbugsReportPath=" + findbugsReportPath +
+                ", reportPath=" + reportPath +
                 '}';
     }
 }

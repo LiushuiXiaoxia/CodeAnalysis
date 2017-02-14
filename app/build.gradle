@@ -57,7 +57,5 @@ analyse {
     pmdConfig = "pmd.xml"
     findbugsConfig = "findbugs.xml"
 
-    checkStyleReportPath = "${project.rootDir}/analysis/reports/"
-    pmdReportPath = "${project.rootDir}/analysis/reports/"
-    findbugsReportPath = "${project.rootDir}/analysis/reports/"
+    reportPath = "${project.rootDir}/analysis/reports/"
 }

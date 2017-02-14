@@ -27,10 +27,10 @@ public class AnalyseCheckstyleTask extends DefaultTask {
 
             reports {
                 html {
-                    destination "${analyse.checkStyleReportPath}/Checkstyle.html"
+                    destination "${analyse.reportPath}/Checkstyle.html"
                 }
                 xml {
-                    destination "${analyse.checkStyleReportPath}/Checkstyle.xml"
+                    destination "${analyse.reportPath}/Checkstyle.xml"
                 }
             }
         }

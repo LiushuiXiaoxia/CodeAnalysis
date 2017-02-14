@@ -29,12 +29,12 @@ public class AnalyseFindbugsTask extends DefaultTask {
             reports {
                 xml {
                     enabled = false
-                    destination "${analyse.findbugsReportPath}/FindBugs.xml"
+                    destination "${analyse.reportPath}/FindBugs.xml"
                     xml.withMessages true
                 }
                 html {
                     enabled = true
-                    destination "${analyse.findbugsReportPath}/FindBugs.html"
+                    destination "${analyse.reportPath}/FindBugs.html"
                 }
             }
         }
