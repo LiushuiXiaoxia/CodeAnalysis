@@ -1,0 +1,111 @@
+//apply plugin: 'pmd'
+//apply plugin: 'findbugs'
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// checkstyle
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+def checkStyleReportPath = "${project.rootDir}/analysis/reports/"
+
+task projectCheckStyle(type: Checkstyle) {
+    source 'src'
+    configFile file("checkstyle.xml")
+    include '**/*.java'
+    exclude '**/gen/**'
+    classpath = files()
+    ignoreFailures true
+
+    reports {
+        html {
+            destination "${checkStyleReportPath}/Checkstyle.html"
+        }
+        xml {
+            destination "${checkStyleReportPath}/Checkstyle.xml"
+        }
+    }
+}
+
+tasks.withType(Checkstyle).each { checkstyleTask ->
+    checkstyleTask.doLast {
+        reports.all { report ->
+            def outputFile = report.destination
+            if (outputFile.exists() && outputFile.text.contains("<error ") && !checkstyleTask.ignoreFailures) {
+                throw new GradleException("There were checkstyle errors! For more info check $outputFile")
+            }
+        }
+    }
+}
+
+preBuild.dependsOn projectCheckStyle
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// pmd
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+def pmdReportPath = "${project.rootDir}/analysis/reports/"
+
+task projectPmd(type: Pmd) {
+    ignoreFailures = true
+    ruleSetFiles = files("pmd.xml")
+    ruleSets = []
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**', '**/build/**'
+
+    reports {
+        xml {
+            enabled = false
+            destination "$pmdReportPath/Pmd.xml"
+        }
+        html {
+            enabled = true
+            destination "$pmdReportPath/Pmd.html"
+        }
+    }
+}
+
+preBuild.dependsOn projectPmd
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// findbugs
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+def findbugsReportPath = "${project.rootDir}/analysis/reports/"
+
+task findbugs(type: FindBugs) {
+    ignoreFailures = true
+    excludeFilter = new File("findbugs.xml")
+    classpath = files()
+    classes = fileTree('build/intermediates/classes/')
+    effort = 'max'
+
+    source = fileTree('src')
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml {
+            enabled = false
+            destination "$findbugsReportPath/FindBugs.xml"
+            xml.withMessages true
+        }
+        html {
+            enabled = true
+            destination "$findbugsReportPath/FindBugs.html"
+        }
+    }
+}
+
+afterEvaluate {
+    tasks.withType(Task).each { task ->
+        task.doLast {
+            if (task.name.startsWith("assemble")) {
+                tasks.findByName("findbugs").execute()
+            }
+        }
+    }
+}
+
+clean.doFirst {
+    delete checkStyleReportPath, pmdReportPath, findbugsReportPath
+}
+

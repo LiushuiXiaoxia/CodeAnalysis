@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+repositories {
+    mavenCentral()
+}
+
+group = 'my.commons.codeanalysis'
+version = '0.1.0-SNAPSHOT'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri("${project.rootDir.absolutePath}/repo"))
+        }
+    }
+}
+
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
