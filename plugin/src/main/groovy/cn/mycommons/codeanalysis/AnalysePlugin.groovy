@@ -2,6 +2,7 @@ package cn.mycommons.codeanalysis
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.logging.LogLevel
 
 public class AnalysePlugin implements Plugin<Project> {
@@ -16,16 +17,10 @@ public class AnalysePlugin implements Plugin<Project> {
 
             createCheckStyleTask(project)
             createPmdTask(project)
+            createFindbugsTask(project)
         } else {
             logE(project, "project must apply '${APPLICATION}' or '${LIBRARY}' plugin.")
         }
-    }
-
-    private void codeAnalysis(Project project) {
-//        project.android.applicationVariants.all { variant ->
-//            String variantName = variant.name
-//            variantName = variantName.substring(0, 1).toUpperCase() + variantName.substring(1)
-//        }
     }
 
     static void createCheckStyleTask(Project project) {
@@ -48,6 +43,25 @@ public class AnalysePlugin implements Plugin<Project> {
                 def analysePmd = project.tasks.create('analysePmd', AnalysePmdTask)
                 analysePmd.group = 'analyse'
                 project.preBuild.dependsOn(analysePmd)
+            }
+        }
+    }
+
+    static void createFindbugsTask(Project project) {
+        if (project.plugins.hasPlugin('findbugs')) {
+            logE(project, "project already use 'findbugs' plugin.")
+        } else {
+            def analyseFindbugs = project.tasks.create('analyseFindbugs', AnalyseFindbugsTask)
+            analyseFindbugs.group = 'analyse'
+
+            project.afterEvaluate {
+                project.tasks.withType(Task).each { task ->
+                    task.doLast {
+                        if (task.name.startsWith("assemble")) {
+                            analyseFindbugs.execute()
+                        }
+                    }
+                }
             }
         }
     }

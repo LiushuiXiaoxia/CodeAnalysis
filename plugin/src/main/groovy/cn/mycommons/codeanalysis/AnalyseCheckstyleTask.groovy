@@ -7,7 +7,7 @@ import org.gradle.api.plugins.quality.Checkstyle
 import org.gradle.api.tasks.TaskAction
 
 /**
- * MyCheckstyleTask <br/>
+ * AnalyseCheckstyleTask <br/>
  * Created by xiaqiulei on 2017-02-14.
  */
 public class AnalyseCheckstyleTask extends DefaultTask {

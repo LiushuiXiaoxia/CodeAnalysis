@@ -5,7 +5,7 @@ import org.gradle.api.plugins.quality.Pmd
 import org.gradle.api.tasks.TaskAction
 
 /**
- * MyCheckstyleTask <br/>
+ * AnalysePmdTask <br/>
  * Created by xiaqiulei on 2017-02-14.
  */
 public class AnalysePmdTask extends DefaultTask {
