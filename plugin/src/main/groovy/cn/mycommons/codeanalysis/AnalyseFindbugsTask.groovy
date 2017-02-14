@@ -17,7 +17,7 @@ public class AnalyseFindbugsTask extends DefaultTask {
 
         def findBugsTask = project.tasks.create('findBugsTask', FindBugs) {
             ignoreFailures = analyse.ignoreFailures
-            excludeFilter = project.file(analyse.findbugsConfig)
+            excludeFilter = project.file(Util.getFileOrTempFile(analyse.findbugsConfig, "findbugs.xml"))
             classpath = project.files()
             classes = project.fileTree('build/intermediates/classes/')
             effort = 'max'

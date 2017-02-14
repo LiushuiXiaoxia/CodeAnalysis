@@ -28,7 +28,7 @@ public class AnalysePlugin implements Plugin<Project> {
             logE(project, "project already use 'checkstyle' plugin.")
         } else {
             if (project.preBuild != null) {
-                def analyseCheckstyle = project.tasks.create('analyseCheckstyle ', AnalyseCheckstyleTask)
+                def analyseCheckstyle = project.tasks.create('analyseCheckstyle', AnalyseCheckstyleTask)
                 analyseCheckstyle.group = 'analyse'
                 project.preBuild.dependsOn(analyseCheckstyle)
             }

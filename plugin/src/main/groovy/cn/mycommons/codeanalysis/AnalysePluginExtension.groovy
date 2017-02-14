@@ -4,11 +4,17 @@ public class AnalysePluginExtension {
 
     def ignoreFailures = true
 
-    def checkStyleConfig = "checkstyle.xml"
-    def pmdConfig = "pmd.xml"
-    def findbugsConfig = "findbugs.xml"
+    String checkStyleConfig
+    String pmdConfig
+    String findbugsConfig
 
     def reportPath = "analysis/reports/"
+
+    AnalysePluginExtension() {
+//        checkStyleConfig = AnalysePlugin.class.getResource("checkstyle.xml").getFile()
+//        pmdConfig = AnalysePlugin.class.getResource("pmd.xml").getFile()
+//        findbugsConfig = AnalysePlugin.class.getResource("findbugs.xml").getFile()
+    }
 
     @Override
     public String toString() {

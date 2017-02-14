@@ -19,7 +19,7 @@ public class AnalyseCheckstyleTask extends DefaultTask {
 
         def checkstyleTask = project.tasks.create('checkstyleTask', Checkstyle) {
             source 'src'
-            configFile project.file(analyse.checkStyleConfig)
+            configFile project.file(Util.getFileOrTempFile(analyse.checkStyleConfig, "checkstyle.xml"))
             include '**/*.java'
             exclude '**/gen/**'
             classpath = project.files()

@@ -17,7 +17,7 @@ public class AnalysePmdTask extends DefaultTask {
 
         def pmdTask = project.tasks.create('pmdTask', Pmd) {
             ignoreFailures = analyse.ignoreFailures
-            ruleSetFiles = project.files(analyse.pmdConfig)
+            ruleSetFiles = project.files(Util.getFileOrTempFile(analyse.pmdConfig, "pmd.xml"))
             ruleSets = []
 
             source 'src'
