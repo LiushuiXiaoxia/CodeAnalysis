@@ -52,6 +52,12 @@ dependencies {
 apply plugin: 'code.analyse'
 analyse {
     ignoreFailures = true
+
     checkStyleConfig = "checkstyle.xml"
+    pmdConfig = "pmd.xml"
+    findbugsConfig = "findbugs.xml"
+
     checkStyleReportPath = "${project.rootDir}/analysis/reports/"
+    pmdReportPath = "${project.rootDir}/analysis/reports/"
+    findbugsReportPath = "${project.rootDir}/analysis/reports/"
 }

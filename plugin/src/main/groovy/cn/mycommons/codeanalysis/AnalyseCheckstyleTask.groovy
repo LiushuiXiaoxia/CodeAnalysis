@@ -13,9 +13,9 @@ import org.gradle.api.tasks.TaskAction
 public class AnalyseCheckstyleTask extends DefaultTask {
 
     @TaskAction
-    void doMyCheckstyleTask() {
+    void doAction() {
         project.apply(plugin: 'checkstyle')
-        def analyse = project.analyse
+        def analyse = project.analyse as AnalysePluginExtension
 
         def checkstyleTask = project.tasks.create('checkstyleTask', Checkstyle) {
             source 'src'

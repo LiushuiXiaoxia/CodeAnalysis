@@ -2,42 +2,6 @@
 //apply plugin: 'findbugs'
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//// checkstyle
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-def checkStyleReportPath = "${project.rootDir}/analysis/reports/"
-
-task projectCheckStyle(type: Checkstyle) {
-    source 'src'
-    configFile file("checkstyle.xml")
-    include '**/*.java'
-    exclude '**/gen/**'
-    classpath = files()
-    ignoreFailures true
-
-    reports {
-        html {
-            destination "${checkStyleReportPath}/Checkstyle.html"
-        }
-        xml {
-            destination "${checkStyleReportPath}/Checkstyle.xml"
-        }
-    }
-}
-
-tasks.withType(Checkstyle).each { checkstyleTask ->
-    checkstyleTask.doLast {
-        reports.all { report ->
-            def outputFile = report.destination
-            if (outputFile.exists() && outputFile.text.contains("<error ") && !checkstyleTask.ignoreFailures) {
-                throw new GradleException("There were checkstyle errors! For more info check $outputFile")
-            }
-        }
-    }
-}
-
-preBuild.dependsOn projectCheckStyle
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// pmd
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 def pmdReportPath = "${project.rootDir}/analysis/reports/"
