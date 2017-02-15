@@ -14,12 +14,13 @@ public class AnalysePlugin implements Plugin<Project> {
     void apply(Project project) {
         if (project.plugins.hasPlugin(APPLICATION) || project.plugins.hasPlugin(LIBRARY)) {
             project.extensions.create("analyse", AnalysePluginExtension)
-            project.analyse.reportPath = "${project.rootDir}/analyse/reports/"
+            project.analyse.reportPath = "${project.buildDir}/reports"
 
             createCleanTask(project)
             createCheckStyleTask(project)
             createPmdTask(project)
             createFindbugsTask(project)
+            configLint(project)
         } else {
             logE(project, "project must apply '${APPLICATION}' or '${LIBRARY}' plugin.")
         }
@@ -74,6 +75,9 @@ public class AnalysePlugin implements Plugin<Project> {
                 }
             }
         }
+    }
+
+    private static void configLint(Project project) {
     }
 
     static void logE(Project project, String msg) {

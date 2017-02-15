@@ -17,14 +17,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    lintOptions {
-        abortOnError false
-        disable 'LogNotTimber', 'IconMissingDensityFolder'
-        htmlReport true
-        htmlOutput file("${project.rootDir}/analysis/reports/lint-report.html")
-        xmlReport true
-        xmlOutput file("${project.rootDir}/analysis/reports/lint-report.xml")
-    }
 }
 
 dependencies {
@@ -41,7 +33,7 @@ dependencies {
 
 buildscript {
     repositories { maven { url uri("${project.rootDir.absolutePath}/repo") } }
-    dependencies { classpath 'my.commons.codeanalysis:plugin:0.1.0-SNAPSHOT' }
+    dependencies { classpath 'my.commons.codeanalysis:plugin:0.1.0' }
 }
 apply plugin: 'code.analyse'
 analyse {
