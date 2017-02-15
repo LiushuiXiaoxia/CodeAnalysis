@@ -42,3 +42,17 @@ buildscript {
 apply plugin: 'code.analyse'
 analyse {
 }
+
+//buildscript {
+//    repositories {
+//        maven {
+//            url 'https://jitpack.io'
+//        }
+//    }
+//    dependencies {
+//        classpath 'com.github.LiushuiXiaoxia.CodeAnalysis:plugin:0.0.2'
+//    }
+//}
+//apply plugin: 'code.analyse'
+//analyse {
+//}

@@ -280,6 +280,31 @@ android {
 
 后续考虑单独做一个实现一个gradle的插件，自动集成上面几种静态代码检查方式，同时可以实现一件配置，以及报告输出。
 
+# 插件
+
+[![](https://jitpack.io/v/LiushuiXiaoxia/CodeAnalysis.svg)](https://jitpack.io/#LiushuiXiaoxia/CodeAnalysis)
+
+```
+buildscript {
+    repositories {
+        maven {
+            url 'https://jitpack.io'
+        }
+    }
+    dependencies {
+        classpath 'com.github.LiushuiXiaoxia.CodeAnalysis:plugin:0.0.2'
+    }
+}
+apply plugin: 'code.analyse'
+analyse {
+    ignoreFailures // 是否忽略失败,可选,默认为true
+    checkStyleConfig // checkstyle自定义配置文件路径,可选
+    pmdConfig // pmd自定义配置文件路径,可选
+    findbugsConfig // findbugs自定义配置文件路径,可选
+}
+```
+
+
 # 相关链接
 
 
