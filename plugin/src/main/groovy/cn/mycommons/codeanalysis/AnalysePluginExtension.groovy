@@ -2,19 +2,13 @@ package cn.mycommons.codeanalysis
 
 public class AnalysePluginExtension {
 
-    def ignoreFailures = true
+    boolean ignoreFailures = true
 
     String checkStyleConfig
     String pmdConfig
     String findbugsConfig
 
-    def reportPath = "analysis/reports/"
-
-    AnalysePluginExtension() {
-//        checkStyleConfig = AnalysePlugin.class.getResource("checkstyle.xml").getFile()
-//        pmdConfig = AnalysePlugin.class.getResource("pmd.xml").getFile()
-//        findbugsConfig = AnalysePlugin.class.getResource("findbugs.xml").getFile()
-    }
+    String reportPath
 
     @Override
     public String toString() {

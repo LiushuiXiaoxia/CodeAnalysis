@@ -14,12 +14,22 @@ public class AnalysePlugin implements Plugin<Project> {
     void apply(Project project) {
         if (project.plugins.hasPlugin(APPLICATION) || project.plugins.hasPlugin(LIBRARY)) {
             project.extensions.create("analyse", AnalysePluginExtension)
+            project.analyse.reportPath = "${project.rootDir}/analyse/reports/"
 
+            createCleanTask(project)
             createCheckStyleTask(project)
             createPmdTask(project)
             createFindbugsTask(project)
         } else {
             logE(project, "project must apply '${APPLICATION}' or '${LIBRARY}' plugin.")
+        }
+    }
+
+    static void createCleanTask(Project project) {
+        if (project.clean != null) {
+            def analyseClean = project.tasks.create('analyseClean', AnalyseCleanTask)
+            analyseClean.group = 'analyse'
+            project.clean.dependsOn(analyseClean)
         }
     }
 
