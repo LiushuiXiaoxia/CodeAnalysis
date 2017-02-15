@@ -33,7 +33,7 @@ dependencies {
 
 buildscript {
     repositories { maven { url uri("${project.rootDir.absolutePath}/repo") } }
-    dependencies { classpath 'my.commons.codeanalysis:plugin:0.1.0' }
+    dependencies { classpath 'com.github.liushuixiaoxia:plugin:0.1.0' }
 }
 apply plugin: 'code.analyse'
 analyse {
