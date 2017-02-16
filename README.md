@@ -284,6 +284,8 @@ android {
 
 [![](https://jitpack.io/v/LiushuiXiaoxia/CodeAnalysis.svg)](https://jitpack.io/#LiushuiXiaoxia/CodeAnalysis)
 
+[![Build Status](https://travis-ci.org/LiushuiXiaoxia/CodeAnalysis.svg?branch=master)](https://travis-ci.org/LiushuiXiaoxia/CodeAnalysis)
+
 ```
 buildscript {
     repositories {
