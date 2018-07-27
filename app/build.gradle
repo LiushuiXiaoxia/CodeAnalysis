@@ -35,26 +35,23 @@ dependencies {
     })
 }
 
+def PLUGIN_DEV = false
+def PLUGIN_ENABLE = false
 
-buildscript {
-    repositories { maven { url uri("${project.rootDir.absolutePath}/repo") } }
-    dependencies { classpath 'com.github.liushuixiaoxia:plugin:0.1.0' }
+if (PLUGIN_ENABLE) {
+    if (PLUGIN_DEV) {
+        buildscript {
+            repositories { maven { url uri("${project.rootDir.absolutePath}/repo") } }
+            dependencies { classpath 'com.github.liushuixiaoxia:plugin:0.1.0' }
+        }
+        apply plugin: 'code.analyse'
+        analyse {}
+    } else {
+        buildscript {
+            repositories { maven { url 'https://jitpack.io' } }
+            dependencies { classpath 'com.github.LiushuiXiaoxia.CodeAnalysis:plugin:0.0.2' }
+        }
+        apply plugin: 'code.analyse'
+        analyse {}
+    }
 }
-
-//apply plugin: 'code.analyse'
-//analyse {
-//}
-
-//buildscript {
-//    repositories {
-//        maven {
-//            url 'https://jitpack.io'
-//        }
-//    }
-//    dependencies {
-//        classpath 'com.github.LiushuiXiaoxia.CodeAnalysis:plugin:0.0.2'
-//    }
-//}
-//apply plugin: 'code.analyse'
-//analyse {
-//}

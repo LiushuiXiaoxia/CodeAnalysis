@@ -8,7 +8,7 @@ import org.gradle.api.tasks.TaskAction
  * AnalysePmdTask <br/>
  * Created by xiaqiulei on 2017-02-14.
  */
-public class AnalysePmdTask extends DefaultTask {
+class AnalysePmdTask extends DefaultTask {
 
     @TaskAction
     void doAction() {

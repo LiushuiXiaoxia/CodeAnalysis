@@ -8,7 +8,7 @@ import org.gradle.api.tasks.TaskAction
  * MyCheckstyleTask <br/>
  * Created by xiaqiulei on 2017-02-14.
  */
-public class AnalyseFindbugsTask extends DefaultTask {
+class AnalyseFindbugsTask extends DefaultTask {
 
     @TaskAction
     void doAction() {

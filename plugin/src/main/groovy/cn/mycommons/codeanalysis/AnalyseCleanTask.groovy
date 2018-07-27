@@ -8,7 +8,7 @@ import org.gradle.api.tasks.TaskAction
  * AnalyseCleanTask <br/>
  * Created by xiaqiulei on 2017-02-14.
  */
-public class AnalyseCleanTask extends DefaultTask {
+class AnalyseCleanTask extends DefaultTask {
 
     @TaskAction
     void doAction() {

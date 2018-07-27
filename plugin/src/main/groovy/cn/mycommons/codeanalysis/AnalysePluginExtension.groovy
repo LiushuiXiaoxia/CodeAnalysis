@@ -1,6 +1,6 @@
 package cn.mycommons.codeanalysis
 
-public class AnalysePluginExtension {
+class AnalysePluginExtension {
 
     boolean ignoreFailures = true
 
@@ -11,7 +11,7 @@ public class AnalysePluginExtension {
     String reportPath
 
     @Override
-    public String toString() {
+    String toString() {
         return "CodeAnalysisPluginExtension{" +
                 "ignoreFailures=" + ignoreFailures +
                 ", checkStyleConfig=" + checkStyleConfig +

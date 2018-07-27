@@ -19,6 +19,10 @@
 
 <!-- /TOC -->
 
+[![](https://jitpack.io/v/LiushuiXiaoxia/CodeAnalysis.svg)](https://jitpack.io/#LiushuiXiaoxia/CodeAnalysis)
+
+[![Build Status](https://travis-ci.org/LiushuiXiaoxia/CodeAnalysis.svg?branch=master)](https://travis-ci.org/LiushuiXiaoxia/CodeAnalysis)
+
 最近项目里面来了很多新的小伙伴，然后每个人的代码风格还不一样，虽然有代码风格文档以及代码review。
 
 但是这些东西需要花费很多人力和时间来做，所以就研究了下静态代码分析，能用工具完成的坚决不用人肉。同时静态代码分析还能解决很多潜在的bug问题。

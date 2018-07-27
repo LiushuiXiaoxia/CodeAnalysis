@@ -5,7 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.logging.LogLevel
 
-public class AnalysePlugin implements Plugin<Project> {
+class AnalysePlugin implements Plugin<Project> {
 
     public static final APPLICATION = 'com.android.application'
     public static final LIBRARY = 'com.android.library'

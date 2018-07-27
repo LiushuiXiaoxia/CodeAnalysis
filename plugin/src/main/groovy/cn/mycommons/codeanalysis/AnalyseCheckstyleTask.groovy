@@ -10,12 +10,18 @@ import org.gradle.api.tasks.TaskAction
  * AnalyseCheckstyleTask <br/>
  * Created by xiaqiulei on 2017-02-14.
  */
-public class AnalyseCheckstyleTask extends DefaultTask {
+class AnalyseCheckstyleTask extends DefaultTask {
 
     @TaskAction
     void doAction() {
         project.apply(plugin: 'checkstyle')
         def analyse = project.analyse as AnalysePluginExtension
+
+        project.checkstyle {
+            // check style bug
+            // https://www.jianshu.com/p/1779f3b862a1
+            toolVersion = '5.9'
+        }
 
         def checkstyleTask = project.tasks.create('checkstyleTask', Checkstyle) {
             source 'src'
