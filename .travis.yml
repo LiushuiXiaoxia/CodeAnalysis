@@ -12,8 +12,10 @@ android:
 
     # The BuildTools version used by your project
     - build-tools-27
+    - build-tools-28
 
     # The SDK version used to compile your project
+    - android-28
     - android-27
     - android-24
     - android-21

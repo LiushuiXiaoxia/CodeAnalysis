@@ -10,8 +10,8 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'groovy'
-//apply plugin: 'maven'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 
 repositories {
     mavenCentral()
